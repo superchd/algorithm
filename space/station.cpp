@@ -2,8 +2,13 @@
 #include <algorithm>
 #include <string>
 #include <cmath>
-
+#include <cstdlib>
+#include <vector>
 using namespace std;
+
+int	flag;
+float 	remember;
+vector<float> ans;
 
 
 struct 	Point{
@@ -12,9 +17,7 @@ struct 	Point{
 	float z;
 };
 
-Point A, B, C, D;
-
-
+Point	A,B,C,D;
 void	my_input(void){
 
 	float x, y, z;
@@ -23,17 +26,14 @@ void	my_input(void){
 	A.x = x;
 	A.y = y;
 	A.z = z;
-
 	cin >> x >> y >> z;
 	B.x = x;
 	B.y = y;
 	B.z = z;
-
 	cin >> x >> y >> z;
 	C.x = x;
 	C.y = y;
 	C.z = z;
-
 	cin >> x >> y >> z;
 	D.x = x;
 	D.y = y;
@@ -43,40 +43,129 @@ void	my_input(void){
 float	length(Point first, Point second){
 
 	float result;
-
 	result = sqrt(pow(first.x - second.x, 2) + pow(first.y - second.y, 2) + pow(first.z - second.z, 2));
 	return result;
 }
 
-Point   coordinate(Point first, Point second, int t){
+Point	center(Point first, Point second){
+
+	Point middle;
+
+	middle.x = (first.x + second.x) / 2;
+	middle.y = (first.y + second.y) / 2;
+	middle.z = (first.z + second.z) / 2;
+	return middle;
+}
+
+Point   coordinate(Point first, Point second, int direction){
 
 	Point current;
 	float epsilon;
 
-	epsilon = t / length(first, second);
+	if (direction == 1)	{epsilon = 0.49;} 
+	else			{epsilon = 0.51;} 
+
 	current.x = (1 - epsilon) * first.x + epsilon * second.x;
 	current.y = (1 - epsilon) * first.y + epsilon * second.y;
 	current.z = (1 - epsilon) * first.z + epsilon * second.z;
 	return current;
 }
 
-float	min_distance(){
+float	left(Point A, Point B, Point C, Point D, int flag){
 
-	Point		line_1, line_2;
-	int		min;
-	min 		= length(A, C);
-	for(int i = 0; i < length(A, B); i++){
-		line_1 = coordinate(A, B, i);
-		for(int j = 0; j < length(C, D); j++){
-			line_2 = coordinate(C, D, j);
-			if (min > length(line_1, line_2)) {min = length(line_1, line_2);}
+	Point ex;
+
+	if (flag == 1)  
+	{
+		ex = coordinate(A, B, 1);
+		return length(ex, center(C, D));
+	}
+	else 
+	{
+		ex = coordinate(C, D, 1);
+		return length(center(A, B), ex);
+	}
+}
+
+float	right(Point A, Point B, Point C, Point D, int flag){
+
+	Point ex;
+
+	if (flag == 1) 
+	{
+		ex = coordinate(A, B, 0);
+		return length(ex, center(C, D));
+	}
+	else 
+	{
+		ex = coordinate(C, D, 0);
+		return length(center(A, B), ex);
+	}
+}
+
+float	recursive_min(Point A, Point B, Point C, Point D) {
+	
+	Point mid;
+	float len = length(center(A, B), center(C, D));
+
+	if (abs(left(A, B, C, D, flag) - right(A, B, C, D, flag)) <= 1)
+	{
+		if (flag == 1)	{ flag = 0;}
+		else		{ flag = 1;}
+	}
+	if (abs(remember - len) < 0.05) 
+	{
+		ans.push_back(ceil(len));
+		return length(center(A, B), center(C, D));}
+
+	if (left(A, B, C, D, 0) >= len && right(A, B, C, D, 0) >= len && left(A, B, C, D, 1) >= len && right(A, B, C, D, 1) >= len)	
+	{
+		cout << ceil(len);
+		ans.push_back(ceil(len));
+		return length(center(A, B), center(C, D));}
+	if (left(A, B, C, D, flag) < len)
+	{
+		remember = len;
+		if (flag == 1) 
+		{
+			mid = center(A, B);
+			recursive_min(A, mid, C, D);
+		}
+		else 
+		{
+			mid = center(C, D);
+			recursive_min(A, B, C, mid);
 		}
 	}
-	return min;
+	else if (right(A, B, C, D, flag) < len)
+	{
+		if (flag == 1) 
+		{
+			mid = center(A, B);
+			recursive_min(mid, B, C, D);
+		}
+		else 
+		{
+			mid = center(C, D);
+			recursive_min(A, B, mid, D);
+		}
+	}
+	else
+	{
+		if (flag == 0) {flag = 1;}
+		else	       {flag = 0;}
+		return recursive_min(A, B, C, D);
+	}
+	return len;
 }
 
 int 	main(void){
 
 	my_input();
-	cout << min_distance();
+	flag = 0;
+	recursive_min(A, B, C, D);
+	flag = 1;
+	recursive_min(A, B, C, D);
+	sort(ans.begin(), ans.end());
+	cout << ans[0];
 }
