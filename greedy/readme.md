@@ -1,2 +1,6 @@
-Greedy algorithm 예제 1. slow.cpp 해설
+Greedy algorithm 예제 1
 =============
+
+## 문제 해결 방법
+
+> 비용을 기준으로 내림차순으로 struct 자료구조를 배열한다. 
