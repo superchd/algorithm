@@ -42,10 +42,12 @@ void	dfs(int depth, string a, string b, string current, int p_idx){
 		return ;}
 	// end condition
 	
-	for (int i = p_idx; i < a.length(); i++){
+	for (int i = 0; i < a.length(); i++){
 		for (int j = 0; j < b.length(); j++){
-			if (a[i] == b[j] && (i - p_idx) % 2 == 1) {
-				dfs(depth + 1, a, b.substr(j), current + a[i], i);} 
+//			cout << "a: " << a.substr(i) << ", b: " << b << endl;
+			if (a[i] == b[j]) {
+			//	cout << "depth: " << depth << ", current: " << current << ", a[i]: " << a[i] << ", b : " << b << endl;
+				dfs(depth + 1, a, b.substr(j + 1), current + a[i], i);}	
 		}
 	}
 	return;	
@@ -56,10 +58,12 @@ void	my_sol(){
 	for (int i = 0; i < k; i++){
 		dfs(0, words[i].first, words[i].second, "", 0);
 		for (auto s: answer){
-			if (s == words[i].second) {flag = 1; break;}
+			cout << s << ", " ;
+			//if (s == words[i].second) {flag = 1; break;}
 		}
-		if (flag == 1) {cout << "YES" << endl;}
-		else	       {cout << "NO" << endl;}
+		cout << endl;
+		//if (flag == 1) {cout << "YES" << endl;}
+		//else	       {cout << "NO" << endl;}
 		flag = 0;
 		answer.clear();
 	}
