@@ -42,7 +42,7 @@ void	dfs(int depth, string a, string b, string current, int p_idx){
 		answer.push_back(current);
 		return ;}
 	// end condition
-	
+//	
 	for (int j = 0; j < b.length(); j++){
 		for (int i = 0; i < a.length(); i++){
 			if (b[j] == a[i] && abs(p_idx - i) % 2 == 1) {
