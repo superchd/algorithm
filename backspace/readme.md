@@ -4,21 +4,11 @@
 * DFS를 통해 나올 수 있는 모든 경우의 단어와 목표 string을 비교해서, 일치하면 "YES" , 불일치하면 "NO"  
 * **그래프는 그래프를 그려야 한다**
 
+<img width="436" alt="스크린샷 2022-06-24 오후 9 55 38" src="https://user-images.githubusercontent.com/63406434/175540492-a26a87dc-f13e-49f5-bfcf-47bba91282a4.png">
 
+### 발생한 문제들
 
-
-```c++
-
-int V, E, u, v, d;
-int edge[27], val[27][27], node[27][27], visit[27];
-int ans[27],  course[27];
-int a_cnt, c_cnt = 0, D, min_d = 21, goal_d = 42;
-int cur_max = 0;
-
-```
-* 다음과 같이 그래프 관련 자료를 셋팅하고 시작하자 
-
-
+* ㅠ
 
 * 입력을 받고 입력 받은 값들을 기준으로 바로 DFS를 시작하자 
 
