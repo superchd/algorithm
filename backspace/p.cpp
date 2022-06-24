@@ -5,6 +5,7 @@
 #include <string>
 #include <stdbool.h>
 #include <array>
+#include <cmath>
 using namespace std;
 
 int		n, m,k;
@@ -37,17 +38,17 @@ void	my_input(void){
 
 void	dfs(int depth, string a, string b, string current, int p_idx){
 
-	if(p_idx == a.length() - 1 || b.length() == 0) {
+	if(b.length() == 0) {
 		answer.push_back(current);
 		return ;}
 	// end condition
 	
-	for (int i = 0; i < a.length(); i++){
-		for (int j = 0; j < b.length(); j++){
-//			cout << "a: " << a.substr(i) << ", b: " << b << endl;
-			if (a[i] == b[j]) {
-			//	cout << "depth: " << depth << ", current: " << current << ", a[i]: " << a[i] << ", b : " << b << endl;
-				dfs(depth + 1, a, b.substr(j + 1), current + a[i], i);}	
+	for (int j = 0; j < b.length(); j++){
+		for (int i = 0; i < a.length(); i++){
+			if (b[j] == a[i] && abs(p_idx - i) % 2 == 1) {
+
+//				cout << "depth: " << depth << ", a: " << a << ", b: " << b << ", b[j] = a[i]: " << b[j] << ", current + a[i]: " << current + a[i] << endl; 
+				dfs(depth + 1, a.substr(i + 1), b.substr(j + 1), current + a[i], i);}
 		}
 	}
 	return;	
@@ -59,11 +60,10 @@ void	my_sol(){
 		dfs(0, words[i].first, words[i].second, "", 0);
 		for (auto s: answer){
 			cout << s << ", " ;
-			//if (s == words[i].second) {flag = 1; break;}
+			if (s == words[i].second) {flag = 1; break;}
 		}
-		cout << endl;
-		//if (flag == 1) {cout << "YES" << endl;}
-		//else	       {cout << "NO" << endl;}
+		if (flag == 1) { cout << "YES" << endl;}
+		else {cout << "NO" << endl;}
 		flag = 0;
 		answer.clear();
 	}
