@@ -13,7 +13,7 @@ struct word{
 	string first;
 	string second;	
 };
-
+int		flag = 0;
 vector<word> 	words;
 vector<string>	answer;
 
@@ -38,7 +38,7 @@ void	my_input(void){
 void	dfs(int depth, string a, string b, string current, int p_idx){
 
 	if(p_idx == a.length() - 1 || b.length() == 0) {
-		if (current == b) {cout << "YES" << endl;}
+		answer.push_back(current);
 		return ;}
 	// end condition
 	
@@ -55,7 +55,13 @@ void	my_sol(){
 
 	for (int i = 0; i < k; i++){
 		dfs(0, words[i].first, words[i].second, "", 0);
-
+		for (auto s: answer){
+			if (s == words[i].second) {flag = 1; break;}
+		}
+		if (flag == 1) {cout << "YES" << endl;}
+		else	       {cout << "NO" << endl;}
+		flag = 0;
+		answer.clear();
 	}
 }
 
