@@ -8,6 +8,6 @@
 ### 발생한 문제들
 
 * backspace , space가 입력을 들어오면 space를 dfs로 못찾더라 왜 이런 문제가 생긴지는 모르겠다. 
-
+* 반복문에서 기준인 i와 j를 바꾸자, 그냥 string b를 기준으로 string b의 한 문자라도 놓치면, return 하면 되잖아
 
 
