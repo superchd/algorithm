@@ -44,11 +44,14 @@ void	dfs(int depth, string a, string b, string current, int p_idx){
 	// end condition
 //	
 	for (int j = 0; j < b.length(); j++){
-		for (int i = 0; i < a.length(); i++){
-			if (b[j] == a[i] && abs(p_idx - i) % 2 == 1) {
-
-//				cout << "depth: " << depth << ", a: " << a << ", b: " << b << ", b[j] = a[i]: " << b[j] << ", current + a[i]: " << current + a[i] << endl; 
-				dfs(depth + 1, a.substr(i + 1), b.substr(j + 1), current + a[i], i);}
+		for (int i = p_idx; i < a.length(); i++){
+//				cout << "depth: " << depth << ", a: " << a << ", b: " << b << ", b[j] = " << b[j] << ", a[i] = " << a[i] <<", current + a[i]: " << current + a[i] << ", abs(p_idx - i): " <<  abs(p_idx - i) << endl; 
+			if (b[j] == a[i]) {
+				if (abs(i - p_idx) % 2 == 1) {
+					dfs(depth + 1, a, b.substr(j + 1), current + a[i], i);}
+				else if (p_idx == 0) {
+					dfs(depth + 1, a, b.substr(j + 1), current + a[i], i);}
+			}
 		}
 	}
 	return;	
