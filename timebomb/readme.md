@@ -14,3 +14,28 @@
 *	다시 이제 토너먼트 돌린다 
 *	토너먼트 돌리면서 flag = 1인 애와 만난 친구들을 벡터에넣는다
 *	벡터에 넣은 친구들끼리 토너먼트 돌린다. 
+* 생긴문제 :: Box[i], Box[j]라고 따로 박스의 인덱스를 넣어주면, 그 박스의 무게를 알려주는 함수가 있다... 이 함수 때문에 방향성을 틀었음 ....
+* 
+``` c++
+
+int box_comp(int i , int  j){
+    called = called + 1;
+    if (called > Limit){
+        out = fopen("test.out", "w");
+        fprintf(out, "Function call limit over");
+        free(Box);
+        exit(-1);
+    }
+    
+    if (i <= 0 || i > N || j <= 0 || j > N) {
+        printf("index out of range : box_comp(%d, %d)\n",i,j);
+        return 0;
+    }
+    printf("check box %d %d\n",Box[i], Box[j]);
+    if (Box[i] < Box[j])
+        return -1;
+    else if (Box[i] > Box[j])
+        return 1;
+    return 0;
+}
+```
