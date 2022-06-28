@@ -7,11 +7,7 @@
 #include <array>
 using namespace std;
 
-
 int		n, m,k;
-int 		arr[MAX] = {0,};
-bool 		visited[MAX] = {0,};
-
 
 vector<vector<int>> 	numbers;
 
@@ -22,63 +18,41 @@ void	my_input(void){
 
 	cin  >> k;
 	for (int j = 0; j < 5; j++){
+		example.clear();
 		for (int i = 0; i < k; i++){
 			cin >> num;
 			example.push_back(num);}
-		number.push_back(example);
+		numbers.push_back(example);
 	}
 	return;
 }
 
-bool	test(int num, vector<int>example){
+int	monotonic(vector<int> ex){
+
+	int cnt = 0;
+	// 순차적으로 증가하는 구간이 몇개인가?
+	for(int i = 0; i < ex.size() - 1; i++){
+		if (ex[i] + 1 != ex[i + 1]) {cnt++;}
+	}
+	return cnt;
+}
+
+void	my_sol(void){
+	int flag;
 	
-	for (int i = 0; i < example.size(); i++){
-		if ( )
-		{             }
+	// 벡터 하나씩 검증하자
+	for (int k = 0; k < numbers.size(); k++){
+		// 벡터하나를 함수에 넣어서 리턴하는 값으로 결과를 판단
+		flag = monotonic(numbers[k]);
+		if (flag == 2) 	   {cout << "one";}
+		else if (flag == 3) {cout << "two";}
+		else		   {cout << "over";}
+		cout << endl;
 	}
-
-}
-
-bool	filp(void){
-
-	for (int i = 0; i < example.size(); i++){
-		if (!test(i, example)){
-			return false;
-		}
-	}
-	return true;
-}
-
-bool	monotonic(vector<int> example){
-
-	for(int i = 0; i < example.size(); i++){
-		if (example[i] == i + 1) {
-			return false;}
-	}
-	return true;
-}
-
-void reverse_str(int start, int end) {
- 
-    int test, test1;
-    cin>>test>>test1;
- 
-    int	num;
- 
-    vector<int> vec;
-    
-    for(int i = 0; i < test; i++){
-        cin >> num;
-        vec.push_back(num);
-    }
-    2
-    for(int i = 0; i < test; i++){
-        reverse(vec[i].begin(), vec[i].end());
-    }
-    return 0;
+	return;
 }
 
 int	main(void) {
-	my_input();
+	my_input(); // 입력받기
 	my_sol();
 }
