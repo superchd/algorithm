@@ -48,6 +48,7 @@
 >> <img src="https://user-images.githubusercontent.com/63406434/176358253-e020f2aa-190c-46b7-9a75-0da2db6b35fd.jpg" width="500" height="370">
 >> 
 >>> ### a,b,c,d 경우는 화살표가 2번 작동하고, e경우는 화살표가 한번 작동하네 
+>>> ### 그렇다면 , 어떻게 일관성을 유지할까? 현재는 화살표가 2번 작동했을때, two라고 결과물을 출력하는데 말이지....
 
 
 
