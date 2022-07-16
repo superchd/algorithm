@@ -91,7 +91,6 @@ void    my_sol(void){
     return ;
 }
 
-
 int main(void){
 
     my_input();
