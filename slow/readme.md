@@ -5,9 +5,24 @@
 >> 할수 있어서 그리 좋은 선택은 아니였던것 같다. 덕분에 key값을 중복으로 받지 않는 딕셔너리의 특징 때문에 불가피하게 클래스를 정의했다.    
 
 ```python 
-class number(object):
-    def __init__(self,num):
-        self.num = num
+class person(object):
+    def __init__(self,name):
+        self.name = name
+
+    def __str__(self):
+        return self.name
+
+    def __repr__(self):
+        return "'"+self.name+"'"
+
+
+def solution():
+    tmp_dict = {}
+
+    tmp_dict[person("bob")] = 18
+    tmp_dict[person("bob")] = 20
+    tmp_dict[person("anna")] = 15
+
 ```
 >> * 다음과 같은 방법으로는 key값 중복이여도 딕셔너리에 추가할 수 있는 기술이다. 
 >> * 그후에 key값과 value값 따로 리스트를 만들어서, 테이블을 채워 넣었다. 
